@@ -55,6 +55,7 @@ app.get('/update-student/:id', async (req, res) => {
     // res.render('update-student.ejs')
 })
 
+
 //All the post Routes
 
 //Registration
@@ -201,7 +202,9 @@ app.post('/update-student/:id', async(req, res) => {
     res.redirect('/students')
 
 })
-// app.delete('/api/students/:id',students.delete)
+app.post('/students', async(req, res) => {
+   
+})
 
 
 app.listen(port, () => {

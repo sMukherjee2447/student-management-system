@@ -106,7 +106,7 @@
                     <% studentDatas.forEach(studentData => { %>
                     <tr>
                         
-                        <th scope="row"><%= studentData._id %></th>
+                        <th scope="row" name= "studentId"><%= studentData._id %></th>
                         <td><%= studentData.firstname %></td>
                         <td><%= studentData.lastname %></td>
                         <td><%= studentData.cls %></td>
@@ -119,7 +119,7 @@
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </span>
                             </a>
-                                <a class="btn border-shadow delete">
+                                <a class="btn border-shadow delete" id="delete" data-id="<%= studentData._id %>">
                                     <span class="text-gradient">
                                         <i class="fa-solid fa-user-slash"></i>
                                     </span>
@@ -131,5 +131,18 @@
             </table>
         </form>
     </div>
+    <script>
+        $('delete').on('click', function() {
+            var studentId = $(this).attr('data-id');
+            $.ajax({
+                method: "POST",
+                url: "/students",
+                data: {"_id": studentId},
+                success: function(result) {
+                location.reload();
+            }
+        })
+   });
+    </script>
 </body>
 </html>
