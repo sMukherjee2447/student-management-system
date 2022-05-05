@@ -38,6 +38,14 @@ app.get('/students', (req, res) => {
     res.render('student-management.ejs')
 })
 
+app.get('/add-student', (req, res) => {
+    res.render('add-student.ejs')
+})
+
+app.get('/update-student', (req, res) => {
+    res.render('update-student.ejs')
+})
+
 app.post('/register', async (req, res) => {
     let {
         fname,
@@ -69,7 +77,7 @@ app.post('/register', async (req, res) => {
     success.push({
         message : "You are now registered, please login"
     })
-    // res.render('login.ejs',success)
+    res.redirect('/login')
     console.log('User created successfully', new_user)
 
 })
