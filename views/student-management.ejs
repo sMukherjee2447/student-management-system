@@ -132,17 +132,7 @@
         </form>
     </div>
     <script>
-        $('delete').on('click', function() {
-            var studentId = $(this).attr('data-id');
-            $.ajax({
-                method: "POST",
-                url: "/students",
-                data: {"_id": studentId},
-                success: function(result) {
-                location.reload();
-            }
-        })
-   });
+        
     </script>
 </body>
 </html>
