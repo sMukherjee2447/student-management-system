@@ -48,8 +48,11 @@ app.get('/add-student', (req, res) => {
     res.render('add-student.ejs')
 })
 
-app.get('/update-student', (req, res) => {
-    res.render('update-student.ejs')
+app.get('/update-student/:id', async (req, res) => {
+    const id = req.params.id
+    const studentDatas = await studentDb.findById(id)
+    res.render('update-student', { studentDatas: studentDatas})
+    // res.render('update-student.ejs')
 })
 
 //All the post Routes
@@ -160,11 +163,44 @@ app.post('/add-student', (req, res) => {
         dob,
         address
     })
+    // alert("Student added successfully")
+    res.redirect('/add-student')
     console.log("saved to database: ",new_student);
 })
 
 // app.get('/api/students', students.find)
-// app.put('/api/students/:id', students.update)
+app.post('/update-student/:id', async(req, res) => {
+
+
+    const id = req.params.id;
+    console.log(id);
+    
+    let student = {
+        firstname,
+        lastname,
+        cls,
+        roll,
+        dob,
+        address
+    } = req.body
+
+    console.log(student);
+    
+    const updates = await studentDb.findOneAndUpdate(
+        { "_id": id },
+         {
+                "$set": {
+                    "firstname": firstname,
+                    "lastname": lastname,
+                    "cls": cls,
+                    "roll": roll,
+                    "dob": dob,
+                    "address": address
+            }
+        })
+    res.redirect('/students')
+
+})
 // app.delete('/api/students/:id',students.delete)
 
 

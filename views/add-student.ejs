@@ -98,7 +98,7 @@
             <h3 class="text-dark">Add New Student</h3>
         </div>
 
-        <form method="post" id="add_user">
+        <form action="/add-student" method="post" id="add_user">
             <div class="new_user">
                 <!-- <div class="form-group">
                     <label for="First-Name">id</label>
@@ -134,5 +134,12 @@
             </div>
         </form>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" 
+    integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        $("#add_user").submit(function(event){
+        alert("Data Inserted Successfully!");
+        })
+    </script>
 </body>
 </html>
