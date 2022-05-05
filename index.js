@@ -1,9 +1,12 @@
+//importing the necessary packages
 const express = require('express')
 const req = require('express/lib/request')
 const app = express()
 const User = require('./model/user')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const studentDb = require('./model/student')
+// const students = require('./controller/student-controller')
 
 
 JWT_SECRET = 'igfiegfibcibi*&%^% fgtyr2637642749yfiwiwu36483gfuie6rwbhc78e6rf*~&^$%$^#%~hgjdgbcevcbvoU'
@@ -11,6 +14,7 @@ JWT_SECRET = 'igfiegfibcibi*&%^% fgtyr2637642749yfiwiwu36483gfuie6rwbhc78e6rf*~&
 const port = 3000
 var bodyParser = require('body-parser')
 
+//mongoDb connection
 var mongoose = require('mongoose')
 mongoose.connect('mongodb://localhost:27017/student-management', {
     useNewUrlParser: true,
@@ -22,6 +26,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs')
 app.use(express.json())
 
+//All the GET routes
 app.get('/', (req, res) => {
   res.render('index.ejs')
 })
@@ -34,8 +39,9 @@ app.get('/login', (req, res) => {
     res.render('login.ejs')
 })
 
-app.get('/students', (req, res) => {
-    res.render('student-management.ejs')
+app.get('/students', async(req, res) => {
+    const studentDatas = await studentDb.find()
+    res.render('student-management.ejs',{ studentDatas: studentDatas })
 })
 
 app.get('/add-student', (req, res) => {
@@ -46,6 +52,9 @@ app.get('/update-student', (req, res) => {
     res.render('update-student.ejs')
 })
 
+//All the post Routes
+
+//Registration
 app.post('/register', async (req, res) => {
     let {
         fname,
@@ -82,6 +91,7 @@ app.post('/register', async (req, res) => {
 
 })
 
+//login
 app.post('/login', async (req, res) => {
     let {
         email,
@@ -121,6 +131,42 @@ app.post('/login', async (req, res) => {
 
 
 })
+
+//adding new student
+app.post('/add-student', (req, res) => {
+    let student = {
+        firstname,
+        lastname,
+        cls,
+        roll,
+        dob,
+        address
+    } = req.body
+
+    console.log("the inputs are", {
+        firstname,
+        lastname,
+        cls,
+        roll,
+        dob,
+        address
+    });
+
+    const new_student = studentDb.create({
+        firstname,
+        lastname,
+        cls,
+        roll,
+        dob,
+        address
+    })
+    console.log("saved to database: ",new_student);
+})
+
+// app.get('/api/students', students.find)
+// app.put('/api/students/:id', students.update)
+// app.delete('/api/students/:id',students.delete)
+
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)

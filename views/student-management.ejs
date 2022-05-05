@@ -92,7 +92,7 @@
             <table class="table">
                 <thead class="thead-dark">
                     <tr>
-                        <th scope="col">Sl. no.</th>
+                        <th scope="col">ID</th>
                         <th scope="col">First Name</th>
                         <th scope="col">Last Name</th>
                         <th scope="col">Class</th>
@@ -103,14 +103,16 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <% studentDatas.forEach(studentData => { %>
                     <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>5</td>
-                        <td>56</td>
-                        <td>5-2-2002</td>
-                        <td>No Where</td>
+                        
+                        <th scope="row"><%= studentData._id %></th>
+                        <td><%= studentData.firstname %></td>
+                        <td><%= studentData.lastname %></td>
+                        <td><%= studentData.cls %></td>
+                        <td><%= studentData.roll %></td>
+                        <td><%= studentData.dob %></td>
+                        <td><%= studentData.address %></td>
                         <td>
                             <a href="/update-student" class="btn border-shadow update">
                                 <span class="text-gradient">
@@ -124,6 +126,7 @@
                                 </a>
                         </td>
                     </tr>
+               <% }) %>
                 </tbody>
             </table>
         </form>
