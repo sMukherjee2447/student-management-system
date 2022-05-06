@@ -68,6 +68,7 @@ app.post('/register', async (req, res) => {
         password2
     } = req.body;
 
+    //just for my reference
     console.log({
         fname,
         lname,
@@ -164,12 +165,11 @@ app.post('/add-student', (req, res) => {
         dob,
         address
     })
-    // alert("Student added successfully")
     res.redirect('/students')
     console.log("saved to database: ",new_student);
 })
 
-// app.get('/api/students', students.find)
+//update a student's details
 app.post('/update-student/:id', async(req, res) => {
 
 
