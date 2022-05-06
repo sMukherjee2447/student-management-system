@@ -86,6 +86,9 @@
                 Add New Student <i class="fa-solid fa-user-graduate"></i>
             </span>
         </a>
+        <p>
+            Topmost field indicates the latest entry
+        </p>
 
         <form action="/students" method="post">
 
@@ -103,7 +106,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <% studentDatas.forEach(studentData => { %>
+                    <% studentDatas.reverse().forEach(studentData => { %>
                     <tr>
                         
                         <th scope="row" name= "studentId"><%= studentData._id %></th>
@@ -119,7 +122,7 @@
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </span>
                             </a>
-                                <a class="btn border-shadow delete" id="delete" data-id="<%= studentData._id %>">
+                                <a class="btn border-shadow delete" id="delete" data-id=<%= studentData._id%>>
                                     <span class="text-gradient">
                                         <i class="fa-solid fa-user-slash"></i>
                                     </span>
@@ -131,8 +134,32 @@
             </table>
         </form>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
     <script>
-        
+        if(window.location.pathname == "/students"){
+            $ondelete = $(".table tbody td a.delete");
+            $ondelete.click(function(){
+            var id = $(this).attr("data-id")
+            console.log(id)
+
+            var request = {
+                "url" : `http://localhost:3000/api/students/${id}`,
+                "method" : "DELETE"
+            }
+
+            if(confirm("Do you really want to delete this record?")){
+                $.ajax(request).done(function(response){
+                    alert("Data Deleted Successfully!");
+                    location.reload();
+                })
+            }
+
+    })
+}
     </script>
+</body>
+</html>
+
+ 
 </body>
 </html>

@@ -6,7 +6,7 @@ const User = require('./model/user')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const studentDb = require('./model/student')
-// const students = require('./controller/student-controller')
+const controller = require('./controller/controller')
 
 
 JWT_SECRET = 'igfiegfibcibi*&%^% fgtyr2637642749yfiwiwu36483gfuie6rwbhc78e6rf*~&^$%$^#%~hgjdgbcevcbvoU'
@@ -202,9 +202,9 @@ app.post('/update-student/:id', async(req, res) => {
     res.redirect('/students')
 
 })
-app.post('/students', async(req, res) => {
-   
-})
+
+//delete function
+app.delete('/api/students/:id', controller.delete);
 
 
 app.listen(port, () => {
