@@ -165,7 +165,7 @@ app.post('/add-student', (req, res) => {
         address
     })
     // alert("Student added successfully")
-    res.redirect('/add-student')
+    res.redirect('/students')
     console.log("saved to database: ",new_student);
 })
 
