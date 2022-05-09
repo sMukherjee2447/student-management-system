@@ -66,7 +66,7 @@ app.post('/register', async (req, res) => {
         email,
         password,
         password2
-    } = req.body;
+    } = req.body; 
 
     //just for my reference
     console.log({
@@ -78,12 +78,12 @@ app.post('/register', async (req, res) => {
     });
 
     const hashed_password = await bcrypt.hash(password, 10)
-    const hashed_password2 = await bcrypt.hash(password2, 10) 
+    const hashed_password2 = await bcrypt.hash(password2, 10)
 
     let success = []
     let errors = []
 
-    if (password != password2) {
+    if (password !== password2) {
         errors.push({ message: "Passwords do not match" })
     }
     if (password.length < 6) {
@@ -93,6 +93,8 @@ app.post('/register', async (req, res) => {
     if (errors.length > 0) {
         res.render('register.ejs', { errors })
     } else {
+        const token = await User.generateAuthToken()
+        console.log("yoooo",token);
         const user = await User.findOne({ email })
 
         if (!user) {
@@ -101,12 +103,13 @@ app.post('/register', async (req, res) => {
                 lname,
                 email,
                 hashed_password,
-                hashed_password2
+                hashed_password2,
+                token
             })
     }
          else {
             errors.push({ message: "User already registered" })
-            res.render('register.ejs', { errors }) 
+            res.render('register.ejs', { errors })
         }
     }
 
@@ -157,6 +160,19 @@ app.post('/login', async (req, res) => {
                 })
         }
     })
+
+// const createToken = async () => {
+//     const token = await jwt.sign({ _id: "6278be5cb191ea849bb1f932" }, JWT_SECRET, {
+//         expiresIn:"2 minutes"
+//     })
+//     console.log(token)
+
+//     const userVer = await jwt.verify(token, JWT_SECRET)
+//     console.log(userVer)
+// }
+
+// createToken();
+
 
 
 })
