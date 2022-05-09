@@ -30,13 +30,20 @@
             This is the login page
         </h1>
     </div>
-    <div class="container text-danger" style="font-style: italic; font-size: medium;">
-        <% if(typeof success != 'undefined') { %>
-            <% success.forEach(success=> { %>
-                <%= success.message %>
-            <% }) %>
-        <% } %>
-    </div>
+
+    <div class="container">
+
+        <ul class="text-danger" style="font-style: italic; font-size: medium;">
+            <% if(typeof errors != 'undefined') { %>
+                <% errors.forEach(errors=> { %>
+                    <li>
+                        <%= errors.message %>
+                    </li>
+                    <% }) %>
+                    <% } %>
+                </ul>
+            </div>
+
     <div class="container reg-form">
         <form method="post" action="">
             <div class="col-auto">

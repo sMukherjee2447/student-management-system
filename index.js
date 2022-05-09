@@ -81,18 +81,40 @@ app.post('/register', async (req, res) => {
     const hashed_password2 = await bcrypt.hash(password2, 10) 
 
     let success = []
-    const new_user = User.create({
-        fname,
-        lname,
-        email,
-        hashed_password,
-        hashed_password2
-    })
+    let errors = []
+
+    if (password != password2) {
+        errors.push({ message: "Passwords do not match" })
+    }
+    if (password.length < 6) {
+        errors.push({ message: "Password must be atleast 6 charecters long" })
+    }
+
+    if (errors.length > 0) {
+        res.render('register.ejs', { errors })
+    } else {
+        const user = await User.findOne({ email })
+
+        if (!user) {
+            const new_user = User.create({
+                fname,
+                lname,
+                email,
+                hashed_password,
+                hashed_password2
+            })
+    }
+         else {
+            errors.push({ message: "User already registered" })
+            res.render('register.ejs', { errors }) 
+        }
+    }
+
     success.push({
         message : "You are now registered, please login"
     })
     res.redirect('/login')
-    console.log('User created successfully', new_user)
+    // console.log('User created successfully', new_user)
 
 })
 
@@ -107,6 +129,8 @@ app.post('/login', async (req, res) => {
         email,
         password
     })
+
+    let errors = []
 
     const user = await User.findOne({ email })
     // console.log(user)
