@@ -1,4 +1,5 @@
 //importing the necessary packages
+require('dotenv').config()
 const express = require('express')
 const req = require('express/lib/request')
 const app = express()
@@ -139,21 +140,16 @@ app.post('/login', async (req, res) => {
     // console.log(user)
         .then(user => {
             if (user) {
-                bcrypt.compare(password, user.hashed_password, function (err, result) {
-                    if (err) {
-                        res.json({
-                        error:err
-                    })
-                    }
-                    if (result) {
-                        let token = jwt.sign({ email: user.email }, JWT_SECRET, { expiresIn: '1h' })
+                const isMatch = bcrypt.compare(password, user.hashed_password)
+
+                    const token = User.generateAuthToken()
+                    console.log("yoooo sign in", token);
+                    
+                    if (isMatch) {
                         res.redirect('/students')
                     } else {
-                        res.json({
-                            message: 'passwords did not match'
-                        })
+                        res.json({ message: "Passwords do not match" })
                     }
-            })
             } else {
                 res.json({
                     message: 'no user found'

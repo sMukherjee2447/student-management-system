@@ -2,8 +2,6 @@ const mongoose = require('mongoose')
 const jwt = require('jsonwebtoken')
 const res = require('express/lib/response')
 
-JWT_SECRET = "kjdbnkjdbnkjdsavnburewhuoy7456dkjbnkjb&^$&^&#%bhbfarbvkjsbadvkj"
-
 const userSchema = new mongoose.Schema({
     fname:
     {
@@ -40,7 +38,7 @@ const userSchema = new mongoose.Schema({
 
 userSchema.statics.generateAuthToken = async function () {
     try {
-        const token = jwt.sign({ _id: this._id }, "iuefkjBCVghueyhfkjBANDgfhhekbnavkjbnkjrfhughrhawhf")
+        const token = jwt.sign({ _id: this._id }, process.env.JWT_SECRET)
         console.log(token)
         return token
     } catch (error) {
