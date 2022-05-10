@@ -33,7 +33,7 @@ const userSchema = new mongoose.Schema({
         type: String
     }
     
-}, { collection: 'users' })
+}, { collection: 'users', })
 
 userSchema.statics.generateAuthToken = async function () {
     try {
