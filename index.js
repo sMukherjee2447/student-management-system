@@ -15,7 +15,7 @@ const port = process.env.PORT || 3000
 
 //mongoDb connection
 var mongoose = require('mongoose')
-mongoose.connect('mongodb://localhost:27017/student-management', {
+mongoose.connect('mongodb://0.0.0.0:27017/student-management', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
