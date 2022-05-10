@@ -30,8 +30,7 @@ const userSchema = new mongoose.Schema({
 
     token:
     {
-        type: String,
-        required: true
+        type: String
     }
     
 }, { collection: 'users' })
@@ -50,4 +49,4 @@ userSchema.statics.generateAuthToken = async function () {
 
 const model = mongoose.model('UserSchema', userSchema)
 
-module.exports = model
+module.exports = model 
