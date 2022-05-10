@@ -16,8 +16,7 @@ const port = process.env.PORT || 3000
 //mongoDb connection
 var mongoose = require('mongoose')
 mongoose.connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
+    useNewUrlParser: true
 })
 
 app.use(bodyParser.json());
