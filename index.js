@@ -15,10 +15,18 @@ const port = process.env.PORT || 3000
 
 //mongoDb connection
 var mongoose = require('mongoose')
-mongoose.connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
+// mongoose.connect(process.env.MONGO_URI, {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true
+// })
+mongoose.connect(
+    process.env.MONGO_URI, {
+        useNewUrlParser: true,
     useUnifiedTopology: true
-})
+    }
+  )
+  .then(()=>console.log('connected'))
+  .catch(e=>console.log(e));
 
 
 
