@@ -25,7 +25,7 @@ mongoose.connect("mongodb+srv://subham:subham@cluster0.ojwma.mongodb.net/test",{
     }
   )
   .then(()=>console.log('connected'))
-  .catch(e=>console.log(e));
+  .catch(e=>console.log(e)); 
 
 
 
