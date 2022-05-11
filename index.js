@@ -19,7 +19,7 @@ var mongoose = require('mongoose')
 //     useNewUrlParser: true,
 //     useUnifiedTopology: true
 // })
-mongoose.connect("mongodb://localhost:27017/student-management", {
+mongoose.connect("mongodb+srv://subham:subham@cluster0.ojwma.mongodb.net/test", {
         useNewUrlParser: true,
     useUnifiedTopology: true
     }
