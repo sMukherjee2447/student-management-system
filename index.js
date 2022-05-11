@@ -9,7 +9,7 @@ const jwt = require('jsonwebtoken')
 const studentDb = require('./model/student')
 const controller = require('./controller/controller')
 const cookieParser = require('cookie-parser')
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser') 
 
 const port = process.env.PORT || 3000
 
